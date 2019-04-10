@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sfr-frontend",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -23,9 +23,14 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/uikit/css/uikit.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/uikit/js/jquery.min.js",
+              "src/assets/uikit/js/uikit.js",
+              "src/assets/uikit/js/uikit-icons.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

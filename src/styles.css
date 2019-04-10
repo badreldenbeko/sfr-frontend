@@ -1,1 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+.uk-card {
+  border-radius: 10px;
+}
+
+.uk-button {
+  border-radius: 30px;
+}
+
+.uk-button-primary {
+  background-color: #3F51B5;
+}
+
+.uk-button-danger {
+  background-color: #AD1457;
+}
+
+.uk-button-warning {
+  background-color: #FF8F00;
+}
+
+.uk-button-success {
+  background-color: #8BC34A;
+  color: white;
+}
+
+.uk-button-default {
+  background-color: #E8EAF6;
+}
+
+.uk-text-primary {
+  color: #3F51B5 !important;
+}
+
+.uk-text-danger {
+  color: #AD1457 !important;
+}
+
+.uk-text-warning {
+  color: #FF8F00 !important;
+}
+
+.uk-text-success {
+  color: #8BC34A !important;
+}
+
+.uk-button-default {
+  background-color: #E8EAF6;
+}
+
+.sub-nav {
+  background: #eef0fc;
+  box-shadow: rgba(8, 8, 8, 0.17) 0px 3px 7px;
+}
+
+nav {
+  box-shadow: rgba(8, 8, 8, 0.45) 0px 3px 5px;
+}
+
+.sfr-close-offcanvas {
+  position: inherit;
+}
