@@ -1,0 +1,45 @@
+<h4 class="uk-text-primary uk-text-center" uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 400; repeat: true">Branches</h4>
+<hr class="uk-divider-icon" uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 480; repeat: true">
+<table class="uk-table uk-table-striped" *ngIf="superUser" uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 560; repeat: true">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>Branch Name</th>
+    <th>Branch Manager</th>
+  </tr>
+  </thead>
+  <tbody uk-scrollspy="cls: uk-animation-slide-left-medium; target: tr; delay: 400; repeat: true">
+  <ng-container *ngFor="let branch of branches">
+    <tr routerLink="/branch/{{branch.id}}">
+      <td>{{branch.id}}</td>
+      <td>{{branch.name|titlecase}}</td>
+      <td>{{branch.branch_manager.username|titlecase}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
+
+<div *ngIf="!superUser" uk-scrollspy="cls: uk-animation-slide-left-medium; target: > .uk-card; delay: 300; repeat: true">
+  <ng-container *ngFor="let branch of branches">
+
+    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-width-1-3@m"
+         routerLink="/branch/{{branch.id}}">
+
+      <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+          <div class="uk-width-auto">
+            <img class="uk-border-circle" width="130" height="130" src="./assets/images/sfr-branch.png">
+          </div>
+          <div class="uk-width-expand">
+            <h3 class="uk-card-title uk-margin-remove-bottom">{{branch.name|titlecase}}</h3>
+            <p class="uk-text-meta uk-margin-remove-top">
+              <time datetime="2016-04-01T19:00">{{branch.created|date}}</time>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-container>
+</div>

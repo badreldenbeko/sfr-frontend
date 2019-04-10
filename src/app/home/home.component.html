@@ -1,0 +1,21 @@
+<app-nav-bar></app-nav-bar>
+<div class="uk-container uk-margin" *ngIf="profile">
+
+  <ng-container *ngIf="profile.user.is_superuser">
+    <h3>Superuser {{profile.user.username|titlecase}}</h3>
+    <app-users></app-users>
+    <app-branches></app-branches>
+    <app-systems></app-systems>
+    <app-products></app-products>
+  </ng-container>
+
+  <ng-container *ngIf="profile.head_manager">
+    <h3>Head Manager {{profile.user.username|titlecase}}</h3>
+    <app-branches></app-branches>
+  </ng-container>
+
+  <ng-container *ngIf="profile.branch_manager">
+    <h3>Branch Manager {{profile.user.username|titlecase}}</h3>
+    <app-systems></app-systems>
+  </ng-container>
+</div>

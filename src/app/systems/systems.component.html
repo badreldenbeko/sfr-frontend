@@ -1,0 +1,46 @@
+<h4 class="uk-text-primary uk-text-center"
+    uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 400; repeat: true">Systems</h4>
+<hr class="uk-divider-icon" uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 480; repeat: true">
+<table class="uk-table uk-table-striped" *ngIf="superUser"
+       uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 560; repeat: true">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>System Name</th>
+    <th>Branch</th>
+  </tr>
+  </thead>
+  <tbody uk-scrollspy="cls: uk-animation-slide-left-medium; target: tr; delay: 400; repeat: true">
+  <ng-container *ngFor="let system of systems">
+    <tr routerLink="/system/{{system.id}}">
+      <td>{{system.id}}</td>
+      <td>{{system.name|titlecase}}</td>
+      <td>{{system.branch.name|titlecase}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
+
+<div class="uk-container" *ngIf="!superUser"
+     uk-scrollspy="cls: uk-animation-slide-left-medium; target: > .uk-card; delay: 300; repeat: true">
+  <div class="uk-flex uk-child-width-1-3@m" uk-grid>
+    <div *ngFor="let system of systems">
+      <div *ngIf="system.branch.branch_manager.id == uid">
+        <div class="uk-card uk-card-default uk-grid-collapse uk-margin"
+             routerLink="/system/{{system.id}}">
+
+          <div class="uk-card-media-left uk-cover-container">
+            <img src="./assets/images/sfr-system.png" alt="" uk-cover>
+            <canvas width="80" height="60"></canvas>
+          </div>
+          <div>
+            <div class="uk-card-body">
+              <h3 class="uk-card-title">{{system.name|titlecase}}</h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

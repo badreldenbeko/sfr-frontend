@@ -1,0 +1,29 @@
+<app-nav-bar></app-nav-bar>
+<div class="uk-container uk-margin-top" *ngIf="branch">
+  <div class="uk-card uk-card-default uk-card-body"
+       uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 300; repeat: true">
+    <h4>{{branch.name|titlecase}} Branch</h4>
+    <p>Manager :
+      <small>{{branch.branch_manager.username|titlecase}}</small>
+    </p>
+    <p>Manager User Status : <span class="uk-text-success" *ngIf="branch.branch_manager.is_active"
+                                   uk-icon="icon: check"></span></p>
+  </div>
+
+  <div class="uk-flex uk-margin-top uk-child-width-1-3@m uk-align-center" uk-grid>
+    <div *ngFor="let system of systems">
+      <div *ngIf="system.branch.id == branch.id">
+        <div class="uk-card uk-card-default uk-card-small"
+             uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 450; repeat: true"
+             routerLink="/system/{{system.id}}">
+          <img class="uk-border-circle" src="./assets/images/sfr-branch.png" uk-img>
+          <div class="uk-width-expand">
+            <h4 class="uk-text-primary uk-text-center"><a>{{system.name|titlecase}}</a>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

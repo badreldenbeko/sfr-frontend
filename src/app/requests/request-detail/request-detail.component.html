@@ -1,0 +1,67 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="uk-padding-small sub-nav" *ngIf="request">
+  <div class="uk-container">
+    <ul class="uk-subnav uk-subnav-divider uk-text-small" uk-margin>
+      <li class="uk-active"><a
+        routerLink="/branch/{{request.product.system.branch.id}}">{{request.product.system.branch.name|titlecase}}</a>
+      </li>
+      <li class="uk-active"><a
+        routerLink="/system/{{request.product.system.id}}">{{request.product.system.name|titlecase}}</a></li>
+      <li class="uk-active"><a routerLink="/product/{{request.product.id}}">{{request.product.name|titlecase}}</a></li>
+      <li><a>Req# {{request.id}}</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="uk-container uk-margin" *ngIf="request">
+  <div class="uk-card uk-card-default uk-animation-slide-bottom">
+    <div class="uk-card-header">
+      <h3 class="uk-card-title">Req# {{request.id}}</h3>
+      <p><strong>Device : </strong>{{request.product.name|titlecase}}
+        <small>Code : {{request.product.code}}</small>
+      </p>
+      <p><strong>Error : </strong>{{request.error.name|titlecase}}</p>
+      <p><strong>Error Description : </strong>{{request.desc}}</p>
+      <p><strong>Request Date : </strong>{{request.created|date: 'short'}}</p>
+      <p *ngIf="request.snt_time"><strong>Sent Date : </strong>{{request.snt_time|date: 'short'}}</p>
+      <p *ngIf="request.res_time" class="uk-text-primary"><strong>Response Time
+        : </strong>{{request.res_time|date: 'short'}} - {{request.product.res_time}} hours</p>
+      <p *ngIf="request.fix_time" class="uk-text-warning"><strong>Fix Time : </strong>{{request.fix_time|date: 'short'}}  - {{request.product.fix_time}} hours
+      </p>
+      <p *ngIf="today.toJSON() > request.fix_time && request.status == 'i'" class="uk-text-danger">Out of time</p>
+      <p *ngIf="request.updated > request.fix_time && request.status == 'c'" class="uk-text-danger">Fixing but not in Time</p>
+    </div>
+
+    <div class="uk-card-media-top uk-text-center">
+      <img src="{{request.product.image}}" alt="{{request.product.name}}">
+    </div>
+
+    <div class="uk-card-footer">
+      <h4>Status</h4>
+
+      <div class="uk-margin uk-text-center">
+
+        <p *ngIf="request.status == 'o'" class="uk-text-warning">Open
+          <small class="uk-text-muted">{{request.created|date: 'short'}}</small>
+        </p>
+        <p *ngIf="request.status == 'i'" class="uk-text-primary">In Progress
+          <small class="uk-text-muted">{{request.updated|date: 'short'}}</small>
+        </p>
+        <p *ngIf="request.status == 'c'" class="uk-text-success">Closed
+          <small class="uk-text-muted">{{request.updated|date: 'short'}}</small>
+        </p>
+
+
+        <div *ngIf="head && (request.status != 'c' && request.status != 'i')">
+          <button class="uk-button uk-button-primary" (click)="markRequest('i')">Sent</button>
+        </div>
+        <div *ngIf="!head && (request.status != 'c' && request.status != 'o')">
+          <button class="uk-button uk-button-success" (click)="markRequest('c')">Done</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="uk-flex uk-flex-center uk-child-width-1-2@m uk-child-width-expand@s">
+  <div class="uk-card uk-margin-medium-top uk-position-center@s">
+    <div class="uk-card-header">
+      <img class="uk-hidden@m" data-src="./assets/images/sfr-system-login.png" uk-img>
+      <h3 class="uk-text-primary uk-text-center">SFR System Login</h3>
+    </div>
+    <div class="uk-card-body">
+      <div class="uk-margin">
+        <input class="uk-input" type="text" placeholder="Username" [(ngModel)]="username">
+      </div>
+      <div class="uk-margin">
+        <input class="uk-input" type="password" placeholder="Password" [(ngModel)]="password">
+      </div>
+      <div class="uk-margin">
+        <button class="uk-button uk-button-success" (click)="login()">Login</button>
+      </div>
+    </div>
+    <div class="uk-card-footer uk-text-center uk-text-muted">
+      <small>CopyRight Sharp IT Co.</small>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<app-nav-bar></app-nav-bar>
+<div class="uk-container uk-margin">
+  <div class="uk-child-width-1-2" uk-grid>
+    <div><h4>All Requests</h4></div>
+    <div class="uk-text-right">
+        <span uk-icon="icon: refresh; ratio: 1.5" (click)="getAllReuests()"></span>
+    </div>
+  </div>
+  <div class="uk-overflow-auto">
+  <table class="uk-table uk-table-striped">
+    <thead>
+    <tr>
+      <th>Req#</th>
+      <th>Create Date</th>
+      <th>Sent Date</th>
+      <th>Response + Fixing Time</th>
+      <th>Close Date</th>
+      <th class="uk-text-center">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let request of requests">
+
+      <ng-container *ngIf="uid == request.product.system.branch.branch_manager.id">
+        <tr routerLink="/request/{{request.id}}">
+          <td>Req# {{request.id}}</td>
+          <td>{{request.created|date: 'short'}}</td>
+          <td>{{request.snt_time|date: 'short'}}</td>
+          <td>{{request.fix_time|date: 'short'}}</td>
+          <td>{{request.cls_time|date: 'short'}}</td>
+          <td class="uk-text-warning uk-text-center" *ngIf="request.status == 'o'">Open</td>
+          <td class="uk-text-primary uk-text-center" *ngIf="request.status == 'i'">In progress</td>
+          <td class="uk-text-success uk-text-center" *ngIf="request.status == 'c'">
+            Closed&nbsp;
+            <span *ngIf="request.cls_time > request.fix_time" class="uk-text-danger">Over Due</span>
+            <span *ngIf="request.cls_time < request.fix_time" class="uk-text-primary">Done In Time</span>
+          </td>
+        </tr>
+      </ng-container>
+
+      <ng-container *ngIf="head || super">
+        <tr routerLink="/request/{{request.id}}">
+          <td>Req# {{request.id}}</td>
+          <td>{{request.created|date: 'short'}}</td>
+          <td>{{request.snt_time|date: 'short'}}</td>
+          <td>{{request.fix_time|date: 'short'}}</td>
+          <td>{{request.cls_time|date: 'short'}}</td>
+          <td class="uk-text-warning uk-text-center" *ngIf="request.status == 'o'">Open</td>
+          <td class="uk-text-primary uk-text-center" *ngIf="request.status == 'i'">In progress</td>
+          <td class="uk-text-success uk-text-center" *ngIf="request.status == 'c'">
+            Closed &nbsp;
+            <span *ngIf="request.cls_time > request.fix_time" class="uk-text-danger">Over Due</span>
+            <span *ngIf="request.cls_time < request.fix_time" class="uk-text-primary">Done In Time</span>
+          </td>
+        </tr>
+      </ng-container>
+
+    </ng-container>
+    </tbody>
+  </table>
+  </div>
+</div>

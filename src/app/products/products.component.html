@@ -1,0 +1,32 @@
+<div class="uk-container uk-padding">
+  <h4 class="uk-text-primary uk-text-center"
+      uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 400; repeat: true">Products</h4>
+  <hr class="uk-divider-icon" uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 480; repeat: true">
+
+  <div class="uk-overflow-auto">
+    <table class="uk-table uk-table-striped uk-table-small" *ngIf="superUser"
+           uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 560; repeat: true">
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>Product Name</th>
+        <th>Product Code</th>
+        <th>Product System</th>
+        <th>Product Branch</th>
+      </tr>
+      </thead>
+      <tbody uk-scrollspy="cls: uk-animation-slide-left-medium; target: tr; delay: 400; repeat: true">
+      <ng-container *ngFor="let product of products">
+        <tr routerLink="/product/{{product.id}}">
+          <td>{{product.id}}</td>
+          <td>{{product.name|titlecase}}</td>
+          <td>{{product.code}}</td>
+          <td>{{product.system.name}}</td>
+          <td>{{product.system.branch.name}}</td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+</div>

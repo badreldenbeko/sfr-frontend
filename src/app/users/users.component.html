@@ -1,0 +1,22 @@
+<h4 class="uk-text-primary uk-text-center" uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 400; repeat: true">Users</h4>
+<hr class="uk-divider-icon" uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 480; repeat: true">
+<table class="uk-table uk-table-striped" uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 560; repeat: true">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>Username</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody uk-scrollspy="cls: uk-animation-slide-left-medium; target: tr; delay: 400; repeat: true">
+  <ng-container *ngFor="let profile of profiles">
+    <tr>
+      <td>{{profile.id}}</td>
+      <td>{{profile.user.username}}</td>
+      <td *ngIf="profile.user.is_superuser">Super User</td>
+      <td *ngIf="profile.head_manager">Head Manager</td>
+      <td *ngIf="profile.branch_manager">Branch Manager</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

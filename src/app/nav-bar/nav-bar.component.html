@@ -1,0 +1,45 @@
+<div class="uk-section-primary uk-preserve-color" style="background: #283593;">
+
+  <div
+    uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light; top: 30">
+
+    <nav class="uk-navbar-container" uk-navbar="boundary-align: true; align: center;">
+      <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav">
+          <li><a type="button" uk-toggle="target: #offcanvas" uk-icon="icon: menu"></a></li>
+          <li class="uk-active"><a routerLink="/home/{{uid}}">SFR System</a></li>
+        </ul>
+      </div>
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+          <li class="uk-active"><a (click)="logout()">Logout &nbsp;<span uk-icon="icon: sign-out"></span></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div id="offcanvas" uk-offcanvas="mode: reveal; overlay: true">
+  <div class="uk-offcanvas-bar" style="background: #283593;">
+
+    <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+
+    <ul class="uk-nav uk-nav-primary uk-margin-auto-vertical">
+      <li class="uk-active"><a routerLink="/home/{{uid}}">SFR System</a></li>
+      <li class="uk-nav-divider"></li>
+      <li class="uk-offcanvas-close sfr-close-offcanvas"><a routerLink="/home/{{uid}}"><span
+        class="uk-margin-small-right" uk-icon="icon: table"></span> Systems</a></li>
+      <li class="uk-nav-divider"></li>
+      <li class="uk-offcanvas-close sfr-close-offcanvas"><a routerLink="/requests/{{uid}}"><span class="uk-margin-small-right"
+                                                                  uk-icon="icon: thumbnails"></span>Requests</a>
+      </li>
+      <li class="uk-nav-divider"></li>
+      <li class="uk-offcanvas-close sfr-close-offcanvas"><a (click)="logout()"><span class="uk-margin-small-right"
+                                                                                     uk-icon="icon: sign-out"></span>
+        Logout</a></li>
+    </ul>
+
+
+  </div>
+</div>

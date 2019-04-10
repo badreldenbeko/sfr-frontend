@@ -1,0 +1,123 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="sub-nav" *ngIf="product">
+  <div class="uk-container uk-padding-small">
+    <ul class="uk-subnav uk-subnav-divider uk-text-small" uk-margin>
+      <li class="uk-active"><a
+        routerLink="/branch/{{product.system.branch.id}}">{{product.system.branch.name|titlecase}}</a></li>
+      <li class="uk-active"><a routerLink="/system/{{product.system.id}}">{{product.system.name|titlecase}}</a></li>
+      <li><a>{{product.name|titlecase}}</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="uk-container uk-margin">
+<div class="uk-flex uk-child-width-1-2@m uk-align-center" *ngIf="product" uk-grid>
+
+  <div>
+    <div class="uk-card uk-card-default uk-animation-slide-bottom">
+
+      <div class="uk-card-header">
+        <h3 class="uk-card-title">Device : {{product.name|titlecase}}</h3>
+        <p>Code : {{product.code}}</p>
+      </div>
+
+      <div class="uk-card-media-top uk-text-center">
+        <img src="{{product.image}}" alt="{{product.name}}">
+      </div>
+
+      <div class="uk-card-footer">
+
+        <div class="uk-flex uk-margin uk-child-width-1-2 uk-align-center" uk-grid>
+          <div>
+            <button class="uk-button uk-button-primary uk-button-small uk-text-small" (click)="hide = true">
+              Device History
+            </button>
+          </div>
+          <div>
+            <button class="uk-button uk-button-danger uk-button-small uk-text-small"
+                    [hidden]="product.in_request || !hide || head"
+                    (click)="hide = false">
+              Request Error
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="uk-container" *ngIf="!hide">
+
+      <div class="uk-margin">
+        <label>Select Error</label>
+        <select class="uk-select" [(ngModel)]="selectedError">
+          <option value="">----</option>
+          <ng-container *ngFor="let error of errors">
+            <ng-container *ngIf="product.error_group.id == error.error_group.id">
+              <option value="{{error.id}}">{{error.name}}</option>
+              <p>{{error.name}}</p>
+            </ng-container>
+          </ng-container>
+        </select>
+      </div>
+
+      <div class="uk-margin">
+        <textarea class="uk-textarea" rows="3" placeholder="Error Description." [(ngModel)]="errDesc"></textarea>
+      </div>
+
+      <div class="uk-margin uk-text-center">
+        <div class="uk-margin-small uk-child-width-1-2" uk-grid>
+          <div>
+            <button class="uk-button uk-button-danger uk-button-small" (click)="createRequest()"
+                    [disabled]="!selectedError">Create
+              Request
+            </button>
+          </div>
+          <div>
+            <button class="uk-button uk-button-default uk-button-small" (click)="cancelRequest()">Cancel
+              Request
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="uk-container" *ngIf="hide">
+      <h4 class="uk-text-muted uk-padding uk-text-center uk-animation-slide-bottom">Device History</h4>
+      <hr class="uk-divider-icon uk-animation-slide-bottom">
+      <table class="uk-table uk-table-striped">
+        <thead>
+        <tr>
+          <th>Req#</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody uk-scrollspy="cls: uk-animation-slide-bottom; target: tr; delay: 250; repeat: true">
+        <ng-container *ngFor="let request of requests">
+          <ng-container *ngIf="request.product.id == product.id">
+            <tr routerLink="/request/{{request.id}}">
+              <td>Req# {{request.id}}</td>
+              <td>{{request.created|date}}</td>
+              <td class="uk-text-warning" *ngIf="request.status == 'o'">Open</td>
+              <td class="uk-text-primary" *ngIf="request.status == 'i'">In Progress</td>
+              <td class="uk-text-success" *ngIf="request.status == 'c'">Closed</td>
+            </tr>
+          </ng-container>
+        </ng-container>
+        <tr>
+          <td>Device Add</td>
+          <td>{{product.created|date}}</td>
+          <td class="uk-text-primary">Start</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</div>
